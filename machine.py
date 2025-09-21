@@ -2,8 +2,7 @@ import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.tree import plot_tree
+
 
 # Load all models
 log_reg = pickle.load(open("logreg (1).pkl", "rb"))
@@ -51,27 +50,5 @@ if st.button("Predict"):
         pred = log_reg.predict(data2)
         st.success(f"Logistic Regression Prediction: {pred[0]}")
 
-# Graphs Section
-if show_graph:
-    if model_choice == "Decision Tree":
-        fig, ax = plt.subplots(figsize=(12, 6))
-        plot_tree(dt, filled=True, ax=ax)
-        st.pyplot(fig)
 
-    elif model_choice == "KMeans":
-        # Example visualization with random data (replace with your dataset later)
-        X = np.random.rand(50, 2)  # fake dataset with 2 features
-        clusters = kmeans.predict(X)
-        fig, ax = plt.subplots()
-        ax.scatter(X[:, 0], X[:, 1], c=clusters, cmap="viridis")
-        ax.set_title("KMeans Clustering")
-        st.pyplot(fig)
 
-    elif model_choice == "Logistic Regression":
-        # Logistic regression decision boundary (sample data, replace later)
-        X = np.random.rand(100, 2)
-        y = np.random.randint(0, 2, 100)
-        fig, ax = plt.subplots()
-        ax.scatter(X[:, 0], X[:, 1], c=y, cmap="coolwarm", edgecolor="k")
-        ax.set_title("Logistic Regression (Sample Data)")
-        st.pyplot(fig)
